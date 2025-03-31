@@ -1,19 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using asmuKantine.Model;
 
-namespace IBAS_kantine.Pages;
-
-public class IndexModel : PageModel
+namespace IBAS_kantine.Pages
 {
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
+    public class IndexModel : PageModel
     {
-        _logger = logger;
-    }
+        private readonly ILogger<IndexModel> _logger;
+        private readonly List<asmuKantineDTO> _menuItems;
 
-    public void OnGet()
-    {
+        public IndexModel(ILogger<IndexModel> logger, List<asmuKantineDTO> menuItems)
+        {
+            _logger = logger;
+            _menuItems = menuItems;
+        }
 
+        public List<asmuKantineDTO> MenuItems { get; private set; }
+
+        public void OnGet()
+        {
+            MenuItems = _menuItems;
+        }
     }
 }

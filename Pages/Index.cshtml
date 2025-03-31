@@ -12,31 +12,14 @@
             <th>Varm Ret</th>
             <th>Kold Ret</th>
         </tr>
-        <tr>
-            <td>Man</td>
-            <td>Kylling & pasta</td>
-            <td>Smørrebrød</td>
-        </tr>
-        <tr>
-            <td>Tirs</td>
-            <td>Græskarsuppe</td>
-            <td>Pastasalat</td>
-        </tr>
-        <tr>
-            <td>Ons</td>
-            <td>Lasagne</td>
-            <td>Rugbrød med pålæg</td>
-        </tr>
-        <tr>
-            <td>Tors</td>
-            <td>Stegt flæsk</td>
-            <td>Æggesalat</td>
-        </tr>
-        <tr>
-            <td>Fre</td>
-            <td>Frikadeller</td>
-            <td>Tunsalat</td>
-        </tr>
+        @foreach (var menuItem in Model.MenuItems)
+        {
+            <tr>
+                <td>@menuItem.Weekday</td>
+                <td>@menuItem.WarmDish</td>
+                <td>@menuItem.ColdDish</td>
+            </tr>
+        }
     </table>
 </div>
 <style>
