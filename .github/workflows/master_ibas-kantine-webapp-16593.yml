@@ -57,6 +57,20 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_701EC824370E4220BF1E6CCB9B67427F }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_48BC48B4B48B47919CE548067453791F }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_684077B5D2B7427BA63E469387E82E1B }}
+          
+      - name: Set Azure App Settings
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: 'ibas-kantine-webapp-16593'
+          slot-name: 'Production'
+          app-settings-json: |
+            [
+              {
+                "name": "ConnectionStrings__AzureTableStorageConnectionString",
+                "value": "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}",
+                "slotSetting": false
+              }
+            ]
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -64,5 +78,5 @@ jobs:
         with:
           app-name: 'ibas-kantine-webapp-16593'
           slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
-          
